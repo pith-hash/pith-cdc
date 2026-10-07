@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "tier": 1,
+  "description": "FastCDC content-defined chunking with a 16-level gear mask table (zero-dep Rust)",
+  "homepage": "https://pith-cdc.n24q02m.com",
+  "topics": [
+    "rust",
+    "deduplication",
+    "chunking",
+    "content-defined-chunking"
+  ]
+}
