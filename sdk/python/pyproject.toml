@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pith-cdc"
+version = "0.1.0"
+description = "FastCDC content-defined chunking SDK: normalized Gear-fingerprint chunk boundaries via the pith-cdc Rust cdylib (ctypes, zero-dep)"
+license = "MIT"
+requires-python = ">=3.9"
+keywords = ["fastcdc", "chunking", "deduplication", "content-defined", "hashing"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Rust",
+  "Topic :: System :: Archiving :: Backup",
+]
+
+[project.urls]
+Repository = "https://github.com/pith-hash/pith-cdc"
+Homepage = "https://github.com/pith-hash/pith-cdc"
+
+[tool.setuptools]
+packages = ["pith_cdc"]
+
+[tool.setuptools.package-data]
+pith_cdc = ["*.dll", "*.dylib", "*.so"]

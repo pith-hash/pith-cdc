@@ -32,8 +32,8 @@
 //! assert_eq!(total, data.len());
 //! ```
 
-#![no_std]
-#![forbid(unsafe_code)]
+#![cfg_attr(not(feature = "std"), no_std)]
+#![deny(unsafe_code)]
 #![deny(missing_docs)]
 
 extern crate alloc;
@@ -42,6 +42,11 @@ mod buzhash;
 mod cdc;
 mod gear;
 mod masks;
+
+/// The C ABI surface the Python (ctypes), Node (koffi) and Go (cgo)
+/// SDKs bind through; see [`crate::ffi`] for the status codes and the
+/// buffer conventions.
+pub mod ffi;
 
 pub use crate::buzhash::{BUZHASH_WINDOW, Buzhash64};
 pub use crate::cdc::{

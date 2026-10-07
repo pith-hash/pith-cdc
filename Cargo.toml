@@ -15,7 +15,15 @@ pith-digest = { git = "https://github.com/pith-hash/pith-digest.git", branch = "
 name = "gen-reference"
 path = "tools/gen-reference/main.rs"
 
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[features]
+# The cdylib needs std's panic handler; the rlib stays no_std-capable
+# via `cargo build --no-default-features`.
+default = ["std"]
+std = []
+
 [lints.rust]
-unsafe_code = "forbid"
 missing_docs = "deny"
 
