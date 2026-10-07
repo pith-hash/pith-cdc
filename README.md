@@ -50,13 +50,10 @@ follows the same rules; CI enforces them mechanically:
 ## Repository layout
 
 ```
-crates/            one published crate per suite lib (pith-<domain>)
+src/               the pith-cdc library (FastCDC chunker, Gear, Buzhash64)
+tests/             behavioural, table-pin, stateful and reference-vector tests
 tools/gen-reference  the vector generator binary (bin name: gen-reference)
-sdk/python         ctypes wheel; build backend reads PITH_CDYLIB_DIR
-sdk/node           koffi-based package; prebuilds/<os-arch>/ carry the cdylib
-sdk/go             cgo binding; go.mod carries the module's cgo flags
-fuzz/corpus        fuzz inputs, replayed by tests/fuzz_corpus.rs (parser crates)
-reference.json     hex-exact cross-SDK test vectors
+reference.json     hex-exact chunking vectors (canonical copy: tests/reference.json)
 ```
 
 ## Install
@@ -72,7 +69,31 @@ see the release assets or the package registries for the matching version.
 
 ## Quick start
 
-(Add example commands here.)
+```rust
+use pith_cdc::FastCdc;
+
+let data = std::fs::read("backup.img")?;
+
+// Spec defaults: min 2 KiB, avg 8 KiB, max 32 KiB, normalization level 2.
+for chunk in FastCdc::new(&data, 2048, 8192, 32768)? {
+    println!("chunk at {} ({} bytes, fingerprint {:016x})",
+             chunk.offset, chunk.length, chunk.hash);
+}
+```
+
+Boundaries are content-defined: insertions shift only nearby cut points,
+and identical regions cut identically, so unchanged blocks deduplicate
+across versions. `chunk(&data, min, avg, max)?` returns the boundaries
+as plain `(offset, length)` pairs.
+
+## Vectors
+
+`tools/gen-reference` regenerates `reference.json` (root copy) and
+`tests/reference.json` (canonical copy) from a fixed input corpus of 11
+vectors: SplitMix64 streams at normalization levels 0–3, degenerate
+all-zero and all-`0xff` fills, a sawtooth pattern, fixed-size edge
+parameters and sub-minimum/empty inputs. `gen-reference verify`
+byte-compares both committed copies; CI runs it on every push.
 
 ## Contributing
 

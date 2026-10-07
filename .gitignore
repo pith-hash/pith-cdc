@@ -60,3 +60,6 @@ superpower/
 superpowers/
 docs/superpowers/
 
+
+# Rust build artifacts
+/target/
