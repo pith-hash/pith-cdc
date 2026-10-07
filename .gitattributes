@@ -1,0 +1,8 @@
+# Deterministic checkouts: the reference-vector gate byte-compares
+# reference.json and tests/reference.json, so line endings must not depend
+# on the platform's core.autocrlf setting.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
