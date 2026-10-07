@@ -4,7 +4,7 @@
 
 - Repo: `pith-hash/pith-cdc`
 - Description: FastCDC content-defined chunking with a 16-level gear mask table (zero-dep Rust)
-- License: Apache-2.0
+- License: MIT
 
 ## Build & Test
 

@@ -5,7 +5,7 @@ edition = "2024"
 rust-version = "1.85"
 description = "FastCDC content-defined chunking with a 16-level gear mask table (zero-dep Rust)"
 readme = "README.md"
-license = "Apache-2.0"
+license = "MIT"
 categories = ["algorithms", "cryptography"]
 
 [dependencies]
