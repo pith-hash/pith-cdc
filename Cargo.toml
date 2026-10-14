@@ -1,6 +1,6 @@
 [package]
 name = "pith-cdc"
-version = "0.1.1-beta.1"
+version = "0.1.1"
 edition = "2024"
 rust-version = "1.85"
 description = "FastCDC content-defined chunking with a 16-level gear mask table (zero-dep Rust)"
